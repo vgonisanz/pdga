@@ -40,7 +40,6 @@ def events(event):
             
 def draw():
     engine.draw_cell(cell)
-    print(cell.rect)
     time.sleep(0.01)
 
 if __name__ == "__main__":

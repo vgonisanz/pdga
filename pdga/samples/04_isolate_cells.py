@@ -15,57 +15,45 @@ width = wwidth/4
 height = wheight/4
 grid_size = 10
 
-state = 0
-
-cell = Cell(initx, inity, width, height,
-    bg_color=Colors.MidnightBlue,
-    grid_color=Colors.LightSkyBlue,
-    border_color=Colors.White,
-    grid_width=grid_size,
-    grid_height=grid_size
-)
-
-cell2 = Cell(initx + 20, inity + 20, width, height,
-    bg_color=Colors.MidnightBlue,
-    grid_color=Colors.LightSkyBlue,
-    border_color=Colors.Red,
-    grid_width=grid_size,
-    grid_height=grid_size
-)
-
-def draw_state_0():
-    engine.draw_cell(cell)
-    engine.draw_cell(cell2)
-
-#def draw_state_1():
-#    engine.draw_cell(cell)
-#    engine.draw_cell(cell2)
+cells = []
 
 def draw():
-    #if state == 0:
-    #    draw_state_0()
-    #elif state == 1:
-    #    draw_state_1()
-    #else:
-    draw_state_0()
+    for cell in cells:
+        engine.draw_cell(cell)
 
-    time.sleep(0.5)
+    time.sleep(0.05)
 
 def events(event):
-    global state
-
     if event.type == pygame.KEYDOWN:
         print("Processing keydown...")
-        if event.key == pygame.K_n:
-            print("state + 1")
-            state += 1
     
+def init():
+    global cells
+
+    cell1 = Cell(initx, inity, width, height,
+        bg_color=Colors.MidnightBlue,
+        grid_color=Colors.LightSkyBlue,
+        border_color=Colors.White,
+        grid_width=grid_size,
+        grid_height=grid_size
+    )
+
+    cell2 = Cell(initx + 20, inity + 20, width, height,
+        bg_color=Colors.MidnightBlue,
+        grid_color=Colors.LightSkyBlue,
+        border_color=Colors.Red,
+        grid_width=grid_size,
+        grid_height=grid_size
+    )
+
+    cells = [ cell1, cell2 ]
 
 if __name__ == "__main__":
     print(f"Initializing engine with {wwidth}, {wheight}")
     engine = Engine(width=wwidth, height=wheight,
                     title=wtitle, debug=True)
 
+    init()
     engine.set_event_callback(events)
     engine.set_draw_callback(draw)
     engine.set_background(Colors.Black)
