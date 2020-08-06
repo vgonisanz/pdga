@@ -63,13 +63,16 @@ class Engine:
         grid_width=20, grid_height=20):
         """
         Draw a cell on the screen. It is like a rect but with more
-        options
+        options.
+
+        It is recommended to use a grid size proportional to cell size
         """
         pygame.draw.rect(self._screen,
             bg_color, 
             rect,
             0)
 
+        # Draw a grid with clipping rect inside
         range_x = round(rect.width/grid_width)
         range_y = round(rect.height/grid_height)
         for x in range(range_x):
@@ -79,6 +82,8 @@ class Engine:
                                 rect.y + y * grid_height,
                                 grid_width,
                                 grid_height)
+
+                grid_rect = grid_rect.clip(rect)
 
                 self.draw_rectangle( rect=grid_rect,
                                 color=grid_color,
