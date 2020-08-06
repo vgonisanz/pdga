@@ -30,18 +30,18 @@ def events(event):
             cell.move_left(grid_size)
         if event.key == (pygame.K_RIGHT or pygame.K_d):
             print("move_right")
-            #cell.move_left()
+            cell.move_right(grid_size)
         if event.key == (pygame.K_UP or pygame.K_w):
             print("move_up")
-            #cell.move_left()
+            cell.move_up(grid_size)
         if event.key == (pygame.K_DOWN or pygame.K_s):
             print("move_down")
-            #cell.move_left()
+            cell.move_down(grid_size)
             
 def draw():
     engine.draw_cell(cell)
     print(cell.rect)
-    time.sleep(0.5)
+    time.sleep(0.01)
 
 if __name__ == "__main__":
     print(f"Initializing engine with {wwidth}, {wheight}")

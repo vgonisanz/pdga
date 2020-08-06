@@ -16,3 +16,12 @@ class Cell:
 
     def move_left(self, amount=1):
         self.rect = self.rect.move(-amount, 0)
+
+    def move_right(self, amount=1):
+        self.rect = self.rect.move(amount, 0)
+
+    def move_up(self, amount=1):
+        self.rect = self.rect.move(0, -amount)
+
+    def move_down(self, amount=1):
+        self.rect = self.rect.move(0, amount)
