@@ -2,9 +2,9 @@ import time
 
 from pdga.engine.core import Engine
 from pdga.engine.enums import Colors
+from pdga.engine.objects import Cell
 
 import pygame
-from pygame import Rect
 
 wtitle = "Basic example"
 wwidth = 800
@@ -13,37 +13,33 @@ initx = wwidth/8
 inity = wheight/8
 width = wwidth/4
 height = wheight/4
+grid_size = 10
 
 state = 0
 
-# Cells attributes
-rect = Rect(initx, inity, width, height)
-rect2 = Rect(initx + 20, inity + 20, width, height)
-bg_color=Colors.MidnightBlue,
-grid_color=Colors.LightSkyBlue,
-border_color=Colors.White
+cell = Cell(initx, inity, width, height,
+    bg_color=Colors.MidnightBlue,
+    grid_color=Colors.LightSkyBlue,
+    border_color=Colors.White,
+    grid_width=grid_size,
+    grid_height=grid_size
+)
+
+cell2 = Cell(initx + 20, inity + 20, width, height,
+    bg_color=Colors.MidnightBlue,
+    grid_color=Colors.LightSkyBlue,
+    border_color=Colors.Red,
+    grid_width=grid_size,
+    grid_height=grid_size
+)
 
 def draw_state_0():
-    engine.draw_cell(rect,
-        bg_color=bg_color,
-        grid_color=grid_color,
-        border_color=border_color)
-
-    engine.draw_cell(rect2,
-        bg_color=bg_color,
-        grid_color=grid_color,
-        border_color=Colors.Red)
+    engine.draw_cell(cell)
+    engine.draw_cell(cell2)
 
 def draw_state_1():
-    engine.draw_cell(rect,
-        bg_color=bg_color,
-        grid_color=grid_color,
-        border_color=border_color)
-
-    engine.draw_cell(rect2,
-        bg_color=bg_color,
-        grid_color=grid_color,
-        border_color=Colors.Red)
+    engine.draw_cell(cell)
+    engine.draw_cell(cell2)
 
 def draw():
     if state == 0:

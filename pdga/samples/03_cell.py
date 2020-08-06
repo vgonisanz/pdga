@@ -2,8 +2,7 @@ import time
 
 from pdga.engine.core import Engine
 from pdga.engine.enums import Colors
-
-from pygame import Rect
+from pdga.engine.objects import Cell
 
 wtitle = "Basic example"
 wwidth = 800
@@ -14,12 +13,12 @@ width = wwidth/2
 height = wheight/2
 
 def draw():
-    rect = Rect(initx, inity, width, height)
-
-    engine.draw_cell(rect,
+    cell = Cell(initx, inity, width, height,
         bg_color=Colors.MidnightBlue,
         grid_color=Colors.LightSkyBlue,
         border_color=Colors.White)
+
+    engine.draw_cell(cell)
     time.sleep(0.5)
 
 if __name__ == "__main__":

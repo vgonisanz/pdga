@@ -1,6 +1,7 @@
 import pygame
 
 from pdga.engine.enums import Colors
+from pdga.engine.objects import Cell
 
 class Engine:
     def __init__(self, width=800, height=600, title="Untitled", debug=False):
@@ -77,8 +78,7 @@ class Engine:
             end,
             border_width)
 
-    def draw_cell(self, rect, bg_color, grid_color=Colors.Red, border_color=Colors.White,
-        grid_width=20, grid_height=20):
+    def draw_cell(self, cell: Cell):
         """
         Draw a cell on the screen. It is like a rect but with more
         options.
@@ -86,30 +86,30 @@ class Engine:
         It is recommended to use a grid size proportional to cell size
         """
         pygame.draw.rect(self._screen,
-            bg_color, 
-            rect,
+            cell.bg_color, 
+            cell.rect,
             0)
 
         # Draw a grid with clipping rect inside
-        range_x = round(rect.width/grid_width)
-        range_y = round(rect.height/grid_height)
+        range_x = round(cell.rect.width/cell.grid_width)
+        range_y = round(cell.rect.height/cell.grid_height)
         for x in range(range_x):
             for y in range(range_y):
                 grid_rect = pygame.Rect(
-                                rect.x + x * grid_width,
-                                rect.y + y * grid_height,
-                                grid_width,
-                                grid_height)
+                                cell.rect.x + x * cell.grid_width,
+                                cell.rect.y + y * cell.grid_height,
+                                cell.grid_width,
+                                cell.grid_height)
 
-                grid_rect = grid_rect.clip(rect)
+                grid_rect = grid_rect.clip(cell.rect)
 
                 self.draw_rectangle( rect=grid_rect,
-                                color=grid_color,
+                                color=cell.grid_color,
                                 border_width=1)
 
         pygame.draw.rect(self._screen,
-            border_color, 
-            rect,
+            cell.border_color, 
+            cell.rect,
             1)
 
     def run(self):
