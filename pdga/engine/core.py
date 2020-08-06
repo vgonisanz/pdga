@@ -1,7 +1,7 @@
 import pygame
 
 from pdga.engine.enums import Colors
-from pdga.engine.objects import Cell
+from pdga.engine.drawables import Cell
 
 class Engine:
     def __init__(self, width=800, height=600, title="Untitled", debug=False):

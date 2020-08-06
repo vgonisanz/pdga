@@ -2,7 +2,7 @@ import time
 
 from pdga.engine.core import Engine
 from pdga.engine.enums import Colors
-from pdga.engine.objects import Cell
+from pdga.engine.drawables import Cell
 
 import pygame
 
