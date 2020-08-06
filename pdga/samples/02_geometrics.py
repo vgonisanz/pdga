@@ -43,6 +43,6 @@ if __name__ == "__main__":
     engine = Engine(width=wwidth, height=wheight,
                     title=wtitle, debug=True)
 
-    engine.set_run_bucle(draw)
+    engine.set_draw_callback(draw)
     engine.set_background(Colors.Black)
     engine.run()

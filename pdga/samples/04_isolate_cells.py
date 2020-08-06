@@ -3,6 +3,7 @@ import time
 from pdga.engine.core import Engine
 from pdga.engine.enums import Colors
 
+import pygame
 from pygame import Rect
 
 wtitle = "Basic example"
@@ -15,48 +16,61 @@ height = wheight/4
 
 state = 0
 
-def draw_state_0():
-    rect = Rect(initx, inity, width, height)
-    rect2 = Rect(initx + 20, inity + 20, width, height)
+# Cells attributes
+rect = Rect(initx, inity, width, height)
+rect2 = Rect(initx + 20, inity + 20, width, height)
+bg_color=Colors.MidnightBlue,
+grid_color=Colors.LightSkyBlue,
+border_color=Colors.White
 
+def draw_state_0():
     engine.draw_cell(rect,
-        bg_color=Colors.MidnightBlue,
-        grid_color=Colors.LightSkyBlue,
-        border_color=Colors.White)
+        bg_color=bg_color,
+        grid_color=grid_color,
+        border_color=border_color)
 
     engine.draw_cell(rect2,
-        bg_color=Colors.MidnightBlue,
-        grid_color=Colors.LightSkyBlue,
-        border_color=Colors.White)
+        bg_color=bg_color,
+        grid_color=grid_color,
+        border_color=Colors.Red)
 
 def draw_state_1():
-    rect = Rect(initx, inity, width, height)
-    rect2 = Rect(initx + 20, inity + 20, width, height)
-
     engine.draw_cell(rect,
-        bg_color=Colors.MidnightBlue,
-        grid_color=Colors.LightSkyBlue,
-        border_color=Colors.White)
+        bg_color=bg_color,
+        grid_color=grid_color,
+        border_color=border_color)
 
     engine.draw_cell(rect2,
-        bg_color=Colors.MidnightBlue,
-        grid_color=Colors.LightSkyBlue,
-        border_color=Colors.White)
-
+        bg_color=bg_color,
+        grid_color=grid_color,
+        border_color=Colors.Red)
 
 def draw():
     if state == 0:
         draw_state_0()
     elif state == 1:
         draw_state_1()
+    else:
+        draw_state_0()
 
     time.sleep(0.5)
+
+def events(event):
+    global state
+
+    if event.type == pygame.KEYDOWN:
+        print("Processing keydown...")
+        if event.key == pygame.K_n:
+            print("state + 1")
+            state += 1
+    
 
 if __name__ == "__main__":
     print(f"Initializing engine with {wwidth}, {wheight}")
     engine = Engine(width=wwidth, height=wheight,
                     title=wtitle, debug=True)
 
-    engine.set_run_bucle(draw)
+    engine.set_event_callback(events)
+    engine.set_draw_callback(draw)
     engine.set_background(Colors.Black)
     engine.run()

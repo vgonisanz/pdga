@@ -4,9 +4,17 @@ from pdga.engine.enums import Colors
 
 class Engine:
     def __init__(self, width=800, height=600, title="Untitled", debug=False):
+        """
+        Basic engine to render 2D stuff
+
+        Features:
+        - set_event_callback: Assign an external event callback
+        - set_event_callback: Assign an external event callback
+        """
         self._debug = debug
         self._quit = False
-        self._run = None
+        self._draw_callback = None
+        self._event_callback = None
         self._background_color = None
 
         print("initializing engine...")
@@ -15,11 +23,21 @@ class Engine:
 
         pygame.init()
 
-    def set_run_bucle(self, func_pointer):
+    def set_draw_callback(self, func_pointer):
         """
         Configure an external function to call every main loop
         """
-        self._run = func_pointer
+        print("Assigning draw callback")
+        self._draw_callback = func_pointer
+
+    def set_event_callback(self, func_pointer):
+        """
+        Configure an external function to call every main loop
+
+        This callback will give a pygame event object
+        """
+        print("Assigning event callback")
+        self._event_callback = func_pointer
 
     def set_background(self, color: Colors):
         """
@@ -96,24 +114,35 @@ class Engine:
 
     def run(self):
         """
-        Default main loop run until quit signal. Use set_run_bucle
+        Default main loop run until quit signal. Use set_draw_callback
         to configure an external function to render things.
 
         This runs in same thread, so a sleep or long calculation
         in external run function will delay the input processing
         and the render process.
+
+        Key reference: https://www.pygame.org/docs/ref/key.html
         """
         while not self._quit:
+            # Refresh background
+            if self._background_color:
+                self._screen.fill(self._background_color)
+
+            # Process internal events and external if attached
             for event in pygame.event.get():
                 if self._debug:
                     print(event)
                 if event.type == pygame.QUIT:
                     self._quit = True
-            if self._run:
-                if self._background_color:
-                    self._screen.fill(self._background_color)
-                self._run()
-                pygame.display.update()
+                if self._event_callback:
+                    self._event_callback(event)
+
+            # Call external draw function if attached 
+            if self._draw_callback:
+                self._draw_callback()
+            
+            # Always update framebuffer
+            pygame.display.update()
 
         print("quiting...")
         pygame.quit()
