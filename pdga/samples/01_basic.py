@@ -5,7 +5,7 @@ from pdga.engine.enums import Colors
 
 def hello_world():
     print("Hello world")
-    time.sleep(0.05)
+    time.sleep(0.5)
 
 if __name__ == "__main__":
     engine = Engine(width=800, height=600,
