@@ -27,11 +27,14 @@ def draw():
 
     rect1 = Rect(0, 0, width, height)
     rect2 = Rect(initx, inity, width, height)
+    rect3 = Rect(wwidth/4, wheight/4, width, height)
 
     # Re-draw
     engine.draw_rectangle(rect1, color=Colors.BLUE)
     engine.draw_rectangle(rect2, color=Colors.RED, border_width=1)
-    print(f"draw {toggle}")
+    engine.draw_ellipse(rect3, color=Colors.GREEN, border_width=5)
+
+    print(f"draw toggle: {toggle}")
     time.sleep(0.5)
 
 if __name__ == "__main__":

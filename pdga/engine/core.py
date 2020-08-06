@@ -32,7 +32,19 @@ class Engine:
         
 
     def draw_rectangle(self, rect, color, border_width=0):
+        """
+        Draw a rectangle on the screen.
+        """
         pygame.draw.rect(self._screen,
+            color, 
+            rect,
+            border_width)
+
+    def draw_ellipse(self, rect, color, border_width=0):
+        """
+        Draw a ellipse on the screen.
+        """
+        pygame.draw.ellipse(self._screen,
             color, 
             rect,
             border_width)
