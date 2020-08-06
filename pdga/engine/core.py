@@ -49,6 +49,16 @@ class Engine:
             rect,
             border_width)
 
+    def draw_line(self, start, end, color, border_width=1):
+        """
+        Draw an array of lines on the screen.
+        """
+        pygame.draw.line(self._screen,
+            color,
+            start,
+            end,
+            border_width)
+
     def run(self):
         """
         Default main loop run until quit signal. Use set_run_bucle
