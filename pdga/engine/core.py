@@ -59,7 +59,8 @@ class Engine:
             end,
             border_width)
 
-    def draw_cell(self, rect, bg_color, grid_color=Colors.Red, border_color=Colors.White):
+    def draw_cell(self, rect, bg_color, grid_color=Colors.Red, border_color=Colors.White,
+        grid_width=20, grid_height=20):
         """
         Draw a cell on the screen. It is like a rect but with more
         options
@@ -68,6 +69,20 @@ class Engine:
             bg_color, 
             rect,
             0)
+
+        range_x = round(rect.width/grid_width)
+        range_y = round(rect.height/grid_height)
+        for x in range(range_x):
+            for y in range(range_y):
+                grid_rect = pygame.Rect(
+                                rect.x + x * grid_width,
+                                rect.y + y * grid_height,
+                                grid_width,
+                                grid_height)
+
+                self.draw_rectangle( rect=grid_rect,
+                                color=grid_color,
+                                border_width=1)
 
         pygame.draw.rect(self._screen,
             border_color, 
