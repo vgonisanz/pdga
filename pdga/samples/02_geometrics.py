@@ -30,10 +30,10 @@ def draw():
     rect3 = Rect(wwidth/4, wheight/4, width, height)
 
     # Re-draw
-    engine.draw_rectangle(rect1, color=Colors.BLUE)
-    engine.draw_rectangle(rect2, color=Colors.RED, border_width=1)
-    engine.draw_ellipse(rect3, color=Colors.GREEN, border_width=5)
-    engine.draw_line([0, 0], [wwidth, wheight], color=Colors.GRAY, border_width=2)
+    engine.draw_rectangle(rect1, color=Colors.Blue)
+    engine.draw_rectangle(rect2, color=Colors.Red, border_width=1)
+    engine.draw_ellipse(rect3, color=Colors.Green, border_width=5)
+    engine.draw_line([0, 0], [wwidth, wheight], color=Colors.Gray, border_width=2)
 
     print(f"draw toggle: {toggle}")
     time.sleep(0.5)
@@ -44,5 +44,5 @@ if __name__ == "__main__":
                     title=wtitle, debug=True)
 
     engine.set_run_bucle(draw)
-    engine.set_background(Colors.BLACK)
+    engine.set_background(Colors.Black)
     engine.run()

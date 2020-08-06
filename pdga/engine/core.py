@@ -59,6 +59,21 @@ class Engine:
             end,
             border_width)
 
+    def draw_cell(self, rect, bg_color, grid_color=Colors.Red, border_color=Colors.White):
+        """
+        Draw a cell on the screen. It is like a rect but with more
+        options
+        """
+        pygame.draw.rect(self._screen,
+            bg_color, 
+            rect,
+            0)
+
+        pygame.draw.rect(self._screen,
+            border_color, 
+            rect,
+            1)
+
     def run(self):
         """
         Default main loop run until quit signal. Use set_run_bucle

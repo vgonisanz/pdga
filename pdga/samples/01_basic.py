@@ -12,5 +12,5 @@ if __name__ == "__main__":
                     title="Basic example", debug=True)
 
     engine.set_run_bucle(hello_world)
-    engine.set_background(Colors.WHITE)
+    engine.set_background(Colors.White)
     engine.run()
