@@ -37,17 +37,17 @@ def draw_state_0():
     engine.draw_cell(cell)
     engine.draw_cell(cell2)
 
-def draw_state_1():
-    engine.draw_cell(cell)
-    engine.draw_cell(cell2)
+#def draw_state_1():
+#    engine.draw_cell(cell)
+#    engine.draw_cell(cell2)
 
 def draw():
-    if state == 0:
-        draw_state_0()
-    elif state == 1:
-        draw_state_1()
-    else:
-        draw_state_0()
+    #if state == 0:
+    #    draw_state_0()
+    #elif state == 1:
+    #    draw_state_1()
+    #else:
+    draw_state_0()
 
     time.sleep(0.5)
 

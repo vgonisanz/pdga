@@ -13,3 +13,6 @@ class Cell:
         self.border_color = border_color
         self.grid_width = grid_width
         self.grid_height = grid_height
+
+    def move_left(self, amount=1):
+        self.rect = self.rect.move(-amount, 0)
