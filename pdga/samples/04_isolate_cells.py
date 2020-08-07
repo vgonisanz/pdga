@@ -3,14 +3,15 @@ import time
 from pdga.engine.core import Engine
 from pdga.engine.enums import Colors
 from pdga.engine.drawables import Cell
+from pdga.engine.factories import Generators
 
 import pygame
 
 wtitle = "Basic example"
 wwidth = 800
 wheight = 600
-initx = wwidth/8
-inity = wheight/8
+initx = wwidth/8*3
+inity = wheight/8*3
 width = wwidth/4
 height = wheight/4
 grid_size = 10
@@ -38,13 +39,7 @@ def init():
         grid_height=grid_size
     )
 
-    cell2 = Cell(initx + 20, inity + 20, width, height,
-        bg_color=Colors.MidnightBlue,
-        grid_color=Colors.LightSkyBlue,
-        border_color=Colors.Red,
-        grid_width=grid_size,
-        grid_height=grid_size
-    )
+    cell2 = Generators.cell_random(initx, inity, width, height, 3, grid_size)
 
     cells = [ cell1, cell2 ]
 
