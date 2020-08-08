@@ -1,10 +1,14 @@
+import os
+import glob
 import pygame
+import tempfile
+from PIL import Image
 
 from pdga.engine.enums import Colors
 from pdga.engine.drawables import Cell
 
 class Engine:
-    def __init__(self, width=800, height=600, title="Untitled", debug=False):
+    def __init__(self, width=800, height=600, title="Untitled", save=False, debug=False):
         """
         Basic engine to render 2D stuff
 
@@ -12,17 +16,39 @@ class Engine:
         - set_event_callback: Assign an external event callback
         - set_event_callback: Assign an external event callback
         """
+        self._save = save
         self._debug = debug
         self._quit = False
         self._draw_callback = None
         self._event_callback = None
         self._background_color = None
+        self._frames = 0
 
         print("initializing engine...")
         self._screen = pygame.display.set_mode((width, height))
         pygame.display.set_caption(title)
 
+        if self._save:
+            self._tmp = tempfile.TemporaryDirectory().name
+            os.mkdir(self._tmp)
+            print(f"temporal path: {self._tmp}")
+
         pygame.init()
+
+    def _cleanup(self):
+        """
+        Clean up engine and finish stuff
+        """
+        if self._save:
+            fp_out = os.path.join(self._tmp, "render.gif")
+            print(f"generating gif at {fp_out}")
+            fp_in = f"{self._tmp}/image_*.png"
+
+            img, *imgs = [Image.open(f) for f in sorted(glob.glob(fp_in))]
+            img.save(fp=fp_out, format='GIF', append_images=imgs,
+                    save_all=True, duration=200, loop=0)
+        print("quiting...")
+        pygame.quit()
 
     def set_draw_callback(self, func_pointer):
         """
@@ -144,7 +170,12 @@ class Engine:
             # Always update framebuffer
             pygame.display.update()
 
-        print("quiting...")
-        pygame.quit()
+            if self._save:
+                filepath = os.path.join(self._tmp, f"image_{self._frames:03}.png")
+                pygame.image.save(self._screen, filepath)
+
+            self._frames += 1
+
+        self._cleanup()
         
 

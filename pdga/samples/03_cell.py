@@ -45,7 +45,7 @@ def draw():
 if __name__ == "__main__":
     print(f"Initializing engine with {wwidth}, {wheight}")
     engine = Engine(width=wwidth, height=wheight,
-                    title=wtitle, debug=True)
+                    title=wtitle, save=True, debug=True)
 
     engine.set_event_callback(events)
     engine.set_draw_callback(draw)
